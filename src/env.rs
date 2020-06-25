@@ -25,10 +25,10 @@ pub fn with_default<'a, T>(
 }
 
 pub fn get_conf<'a>() -> Result<EnvConfiguration, EnvError<'a>> {
-    let email = var("DIWI_EMAIL")?;
-    let password = var("DIWI_PASSWORD")?;
-    let club = var("DIWI_CLUB")?;
-    let socketaddr = with_default(var("DIWI_SOCKETADDR"), "127.0.0.1:8080".parse().unwrap())?;
+    let email = var("DEWI_EMAIL")?;
+    let password = var("DEWI_PASSWORD")?;
+    let club = var("DEWI_CLUB")?;
+    let socketaddr = with_default(var("DEWI_SOCKETADDR"), "127.0.0.1:8080".parse().unwrap())?;
 
     Ok(EnvConfiguration {
         email,
