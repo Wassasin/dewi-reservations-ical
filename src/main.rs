@@ -136,7 +136,7 @@ pub struct Conf(std::sync::Arc<EnvConfiguration>);
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    let configuration = env::get_conf().expect("Some configuration variable not set");
+    let configuration = env::get_conf().unwrap();
     HttpServer::new(move || {
         let configuration = configuration.clone();
 
