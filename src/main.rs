@@ -117,6 +117,7 @@ async fn get_ical(conf: Data<EnvConfiguration>) -> Result<HttpResponse> {
 
     reservations.into_iter().for_each(|r| {
         let mut event = Event::new(format!("{}", r.id), instant_to_icalstr(&r.start));
+        event.push(DtStart::new(instant_to_icalstr(&r.start)));
         event.push(DtEnd::new(instant_to_icalstr(&r.end)));
         event.push(Summary::new(r.name));
         event.add_alarm(Alarm::display(
