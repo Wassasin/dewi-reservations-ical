@@ -1,0 +1,19 @@
+[package]
+name = "dewi-reservations-ical"
+version = "0.1.0"
+authors = ["Wouter Geraedts <git@woutergeraedts.nl>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = { version = "2.0.0", features = ["rustls"] }
+actix-rt = "1.1.1"
+awc = "1.0.1"
+
+ics = "0.4.2"
+
+serde = "1.0.114"
+serde_json = "1.0.55"
+chrono = { version = "0.4.11", features = ["serde"] }
+chrono-tz = "0.5.2"
