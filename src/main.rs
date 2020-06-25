@@ -137,6 +137,8 @@ pub struct Conf(std::sync::Arc<EnvConfiguration>);
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     let configuration = env::get_conf().unwrap();
+    let socketaddr = configuration.socketaddr;
+
     HttpServer::new(move || {
         let configuration = configuration.clone();
 
@@ -145,7 +147,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/json").to(get_json))
             .service(web::resource("/ical").to(get_ical))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(socketaddr)?
     .run()
     .await
 }
