@@ -108,6 +108,7 @@ async fn get_ical(conf: Data<EnvConfiguration>) -> Result<HttpResponse> {
     use ics::{properties::*, *};
 
     let reservations = compute_reservations(&conf).await?;
+    let now = Utc::now();
 
     let mut calendar = ICalendar::new("2.0", "dewi-reservations");
     calendar.add_timezone(TimeZone::new(
@@ -118,7 +119,7 @@ async fn get_ical(conf: Data<EnvConfiguration>) -> Result<HttpResponse> {
     calendar.push(Method::new("PUBLISH"));
 
     reservations.into_iter().for_each(|r| {
-        let mut event = Event::new(format!("{}", r.id), instant_to_icalstr(&r.start));
+        let mut event = Event::new(format!("{}", r.id), instant_to_icalstr(&now));
         event.push(DtStart::new(instant_to_icalstr(&r.start)));
         event.push(DtEnd::new(instant_to_icalstr(&r.end)));
         event.push(Summary::new(r.name));
