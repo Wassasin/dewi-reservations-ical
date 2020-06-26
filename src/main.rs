@@ -114,6 +114,8 @@ async fn get_ical(conf: Data<EnvConfiguration>) -> Result<HttpResponse> {
         "UTC",
         ZoneTime::standard("19700329T020000", "+0000", "+0000"),
     ));
+    calendar.push(CalScale::new("GREGORIAN"));
+    calendar.push(Method::new("PUBLISH"));
 
     reservations.into_iter().for_each(|r| {
         let mut event = Event::new(format!("{}", r.id), instant_to_icalstr(&r.start));
